@@ -11,8 +11,10 @@ public class Main {
 	protected ArrayList<Word> secondLine = new ArrayList<Word>();
 	protected ArrayList<Word> thirdLine = new ArrayList<Word>();
 	private Word word;
-	private int currentLoc = 0;
 	private String everything;
+	int firstRow = 0;
+	int secondRow = 0;
+	int thirdRow = 0;
 	
 	public Main() throws IOException{
 		readFile("TomSawyer.txt");
@@ -20,7 +22,8 @@ public class Main {
 		checkHaiku(allWords);
 	}
 	public static void main(String[] args) throws IOException {
-	     Main run = new Main();
+		new Main();
+	     //Main run = new Main();
 	}
 
 	public void readFile(String fileName) throws IOException{
@@ -76,12 +79,20 @@ public class Main {
 		}
 	}
 	
+	public void clear(){
+		firstLine.clear();
+		secondLine.clear();
+		thirdLine.clear();
+		firstRow=0;
+		secondRow=0;
+		thirdRow=0;
+	}
+	
 	public void checkHaiku(ArrayList<Word> list){
-		int firstRow = 0;
-		int secondRow = 0;
-		int thirdRow = 0;
+		firstRow = 0;
+		secondRow = 0;
+		thirdRow = 0;
 		int j = 0;
-		//for(int i=0; i<list.size(); i++){
 			while(j<list.size()){
 				int temp = list.get(j).getSyllables();
 				if(firstRow<5){
@@ -89,18 +100,24 @@ public class Main {
 					if(firstRow+temp<=5){
 						firstLine.add(list.get(j));
 						firstRow=firstRow+temp;
+					}else{
+						clear();
 					}
 				}else if(firstRow==5&&secondRow<7){
 					System.out.println("<57");
 					if(secondRow+temp<=7){
 						secondLine.add(list.get(j));
 						secondRow=secondRow+temp;
+						}else{
+							clear();
 						}
 				}else if(firstRow==5&&secondRow==7&&thirdRow<5){
 					System.out.println("<575");
 					if(thirdRow+temp<=5){
 						thirdLine.add(list.get(j));
 						thirdRow=thirdRow+temp;
+					}else{
+						clear();
 					}
 				}else if(firstRow==5&&secondRow==7&&thirdRow==5){
 					System.out.println("Haiku");
@@ -118,17 +135,11 @@ public class Main {
 						firstRow=firstRow+temp;
 					}
 				}else{
-					firstLine.clear();
-					secondLine.clear();
-					thirdLine.clear();
-					firstRow=0;
-					secondRow=0;
-					thirdRow=0;
+					clear();
 				}
 				j++;
 			}
-		//}
-		
+			
 	}
 	
 	
