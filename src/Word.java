@@ -19,6 +19,7 @@ public class Word {
 		return word+" ";
 	}
 	
+	//calculates number of syllables in word based on vowels
 	private void calcSyllables(){
 		vowelFound=false;
 		for(int i=0; i<word.length(); i++){
@@ -37,6 +38,7 @@ public class Word {
         }
 	}
 	
+	//checks to see if string ends with e. returns true if it does, false if not
 	private boolean endsWithE(String word){
 		if(word.charAt(word.length()-1)=='e'){
 			return true;
@@ -44,6 +46,7 @@ public class Word {
 		return false;
 	}
 	
+	//checks if char is a vowel
 	private boolean isVowel(char c){
 		if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u'||c=='y'){
 			previousVowel = c;

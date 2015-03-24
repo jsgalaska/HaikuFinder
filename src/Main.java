@@ -23,9 +23,9 @@ public class Main {
 	}
 	public static void main(String[] args) throws IOException {
 		new Main();
-	     //Main run = new Main();
 	}
 
+	//Reads a text file in and puts it in a string called everything
 	public void readFile(String fileName) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
     	try {
@@ -35,9 +35,6 @@ public class Main {
     		while (line != null) {
     			sb.append(line);
     			sb.append(' ');
-    			//sb.append(System.lineSeparator());
-    			//line = br.readLine();
-    			//parseString(line);
     			line = br.readLine();
     		}
     		everything = sb.toString();
@@ -46,26 +43,17 @@ public class Main {
     	}
 	}
 	
-	public void parseString(String line){
-		String currentWord;
-		StringTokenizer st = new StringTokenizer(line);
-	     while (st.hasMoreTokens()) {
-	         currentWord = st.nextToken();
-	         word = new Word(currentWord);
-	         firstLine.add(word);
-	     }
-	}
-	
+	//prints a line of the haiku
 	public void printList(ArrayList<Word> list){
 		StringBuilder sb = new StringBuilder();
 		for(int i=0; i<list.size(); i++){
 			sb.append(list.get(i).toString());
-			//System.out.println(" "+list.get(i).toString()+" ");
 		}
 		String line = sb.toString();
 		System.out.println(line);
 	}
 	
+	//breaks up the string and adds each word as a Word to the allWords arraylist
 	public void doStuff(String message){
 		String[] test;
 		int i = 0;
@@ -73,12 +61,11 @@ public class Main {
 		while(i<test.length){
 			word = new Word(test[i]);
 			allWords.add(word);
-			//System.out.println(word.getSyllables());
-			//System.out.println(test[i]);
 			i++;
 		}
 	}
 	
+	//clears the three lines in haiku
 	public void clear(){
 		firstLine.clear();
 		secondLine.clear();
@@ -88,6 +75,7 @@ public class Main {
 		thirdRow=0;
 	}
 	
+	//iterates through the arraylist of words to find haikus. When one is found it is printed out.
 	public void checkHaiku(ArrayList<Word> list){
 		firstRow = 0;
 		secondRow = 0;
@@ -96,7 +84,7 @@ public class Main {
 			while(j<list.size()){
 				int temp = list.get(j).getSyllables();
 				if(firstRow<5){
-					System.out.println("<5");
+					//System.out.println("<5");
 					if(firstRow+temp<=5){
 						firstLine.add(list.get(j));
 						firstRow=firstRow+temp;
@@ -104,7 +92,7 @@ public class Main {
 						clear();
 					}
 				}else if(firstRow==5&&secondRow<7){
-					System.out.println("<57");
+					//System.out.println("<57");
 					if(secondRow+temp<=7){
 						secondLine.add(list.get(j));
 						secondRow=secondRow+temp;
@@ -112,7 +100,7 @@ public class Main {
 							clear();
 						}
 				}else if(firstRow==5&&secondRow==7&&thirdRow<5){
-					System.out.println("<575");
+					//System.out.println("<575");
 					if(thirdRow+temp<=5){
 						thirdLine.add(list.get(j));
 						thirdRow=thirdRow+temp;
@@ -120,7 +108,7 @@ public class Main {
 						clear();
 					}
 				}else if(firstRow==5&&secondRow==7&&thirdRow==5){
-					System.out.println("Haiku");
+					System.out.println("\nHaiku");
 					printList(firstLine);
 					printList(secondLine);
 					printList(thirdLine);
